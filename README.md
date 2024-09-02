@@ -17,3 +17,4 @@ https://your-account-name.github.io
 Настройку деплоя смотрите тут .github/workflows/main.yml
 
 Используйте [feature sliced design](https://feature-sliced.design/ru/docs/get-started/overview)
+... 
