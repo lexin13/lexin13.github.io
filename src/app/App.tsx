@@ -16,7 +16,9 @@ function App() {
           </li>
           <li>
             Цель обучения: пополнение и систематизация знаний о React для дальнейшего применения в рабочем проекте
-            Технологии: Delphi, MS SQL Server, SQL, FastReports, Git; знаком с C#, JS. 
+          </li>
+          <li>
+            Технологии: Delphi, MS SQL Server, SQL, FastReports, Git; знаком с C#, JS
           </li>
         </ul>
       </header>
