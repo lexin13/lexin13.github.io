@@ -1,0 +1,58 @@
+$primary-color: #ff6f61;
+$hover-color: #ff4a3d;
+$text-color: white;
+
+@mixin transition($property, $duration, $ease) {
+    transition: $property $duration $ease;
+}
+
+.cartButton {
+    background-color: $primary-color;
+    color: $text-color;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    @include transition(background-color, 0.3s, ease);
+
+    &:hover {
+        background-color: $hover-color;
+    }
+}
+
+$button-color: #ff6f61;
+$button-hover-color: #ff4a3d;
+$input-border-color: #ccc;
+
+.inputContainer {
+    display: flex;
+    align-items: center;
+}
+
+.inputContainer input[type="text"] {
+    width: 100px;
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid $input-border-color;
+    border-radius: 4px;
+    margin: 0 5px;
+}
+
+.inputContainer button {
+    background-color: $button-color;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    @include transition(background-color, 0.3s, ease);
+
+    &:hover {
+        background-color: $button-hover-color;
+    }
+}
