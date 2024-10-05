@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import s from './product.module.scss';
 import { CartButton } from "../cartbutton/CartButton";
 
@@ -9,8 +9,7 @@ interface ProductProps {
     category: string;
     description: string;
 }
-
-export function Product({ price, images, category, name, description }: ProductProps) {
+export const Product: FC<ProductProps> = ({ price, images, category, name, description }) => {
     var imgList = [];
 
     for (var i = 0; i < images.length; i++) {

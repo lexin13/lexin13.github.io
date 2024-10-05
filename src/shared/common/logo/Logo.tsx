@@ -1,8 +1,8 @@
-import React from "react";
+import React, { FC } from "react";
 
 import logo from './logo.png';
 
-export function Logo() {
+export const Logo: FC = () => {
     return (
         <div>
             <img src={logo} />

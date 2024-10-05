@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import s from './cartbutton.module.scss';
 
 export interface CartButtonProps {
     counter: number
 }
 
-export function CartButton({ counter }: CartButtonProps) {
+export const CartButton: FC<CartButtonProps> = ({ counter }) => {
     if (counter > 0)
         return (
             <div className={s.inputContainer}>

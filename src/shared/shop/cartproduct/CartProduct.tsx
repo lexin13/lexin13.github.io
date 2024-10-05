@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import s from './cart_product.module.scss';
 
 export interface CartProductProps {
@@ -7,7 +7,7 @@ export interface CartProductProps {
     name: string;
 }
 
-export function CartProduct({ price, image, name }: CartProductProps) {
+export const CartProduct: FC<CartProductProps> = ({ price, image, name }) => {
     return (
         <div className={s.card}>
             <div className={s["card-header"]}>

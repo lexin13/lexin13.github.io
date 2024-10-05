@@ -1,13 +1,16 @@
-import React from "react";
+import React, { Children, FC } from "react";
 import { Logo } from "../logo/Logo";
 import s from './header.module.scss';
 
-export function Header() {
+interface HeaderProps {
+    children?: React.ReactNode;
+}
+
+export const Header: FC<HeaderProps> = ({ children }) => {
     return (
         <header className={s.header}>
-            <div>
-                <Logo />
-            </div>
+            <Logo />
+            <div>{children}</div>
         </header>
     )
 }

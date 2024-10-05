@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import s from './short_operation.module.scss';
 
 interface ShortOperationProps {
@@ -8,7 +8,7 @@ interface ShortOperationProps {
     description: string;
 }
 
-export function ShortOperation({ amount, category, name, description }: ShortOperationProps) {
+export const ShortOperation: FC<ShortOperationProps> = ({ amount, category, name, description }) => {
     return (
         <div className={s["card"]}>
             <div className={s["card-header"]}>

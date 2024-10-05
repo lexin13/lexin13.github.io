@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Header } from './Header';
 
 const meta: Meta<typeof Header> = {
@@ -33,6 +33,20 @@ const meta: Meta<typeof Header> = {
 export default meta;
 
 export const Sample = {
+  args: {},
+};
+
+type Story = StoryObj<typeof Header>;
+
+export const ModalWithChildren: Story = {
   args: {
+
   },
+  render: ({ ...args }) =>
+    <Header {...args}>
+      <div style={{ display: 'flex', margin: '30px' }}>
+        <div><p>Lorem ipsum odor amet</p></div>
+        <button>Login</button>
+      </div>
+    </Header >
 };

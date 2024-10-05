@@ -1,10 +1,15 @@
-import React from "react";
+import React, { Children, FC } from "react";
 import { Header } from "../header/Header";
 
-export function Layout() {
+interface LayoutProps {
+    children?: React.ReactNode;
+}
+
+export const Layout: FC<LayoutProps> = ({ children }) => {
     return (
         <div>
             <Header />
+            {children}
         </div>
     )
 }

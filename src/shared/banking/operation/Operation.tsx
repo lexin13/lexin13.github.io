@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import s from './operation.module.scss';
 
 interface OperationProps {
@@ -9,7 +9,7 @@ interface OperationProps {
     date: string;
 }
 
-export function Operation({ amount, category, name, description, date }: OperationProps) {
+export const Operation: FC<OperationProps> = ({ amount, category, name, description, date }) => {
     return (
         <div className={s.card}>
             <div className={s["card-header"]}>

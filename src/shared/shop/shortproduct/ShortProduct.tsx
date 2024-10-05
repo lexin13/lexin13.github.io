@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import s from './short_product.module.scss';
 import { CartButton } from "../cartbutton/CartButton";
 
@@ -9,7 +9,7 @@ export interface ShortProductProps {
     description: string;
 }
 
-export function ShortProduct({ price, image, name, description }: ShortProductProps) {
+export const ShortProduct: FC<ShortProductProps> = ({ price, image, name, description }) => {
     return (
         <div className={s.card}>
             <div className={s["card-header"]}>
