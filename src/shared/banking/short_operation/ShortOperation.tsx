@@ -1,5 +1,5 @@
 import React from "react";
-import s from './short_operation.module.scss';
+import style from './short_operation.module.scss';
 
 interface ShortOperationProps {
     amount: number;
@@ -8,16 +8,16 @@ interface ShortOperationProps {
     description: string;
 }
 
-export function ShortOperation({ amount, category, name, description }: ShortOperationProps) {
+export const ShortOperation: React.FC<ShortOperationProps> = ({ amount, category, name, description }) => {
     return (
-        <div className={s["card"]}>
-            <div className={s["card-header"]}>
-                <span className={s["category"]}>{category}</span>
-                <span className={s["money-value"]}>{amount}</span>
+        <div className={style["card"]}>
+            <div className={style["card-header"]}>
+                <span className={style["category"]}>{category}</span>
+                <span className={style["money-value"]}>{amount}</span>
             </div>
-            <div className={s["card-body"]}>
-                <h2 className={s["name"]}>{name}</h2>
-                <p className={s["description"]}>{description}</p>
+            <div className={style["card-body"]}>
+                <h2 className={style["name"]}>{name}</h2>
+                <p className={style["description"]}>{description}</p>
             </div>
         </div>
     );

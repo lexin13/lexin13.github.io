@@ -1,5 +1,5 @@
 import React from "react";
-import s from './cart_product.module.scss';
+import style from './cart_product.module.scss';
 
 export interface CartProductProps {
     price: number;
@@ -7,16 +7,16 @@ export interface CartProductProps {
     name: string;
 }
 
-export function CartProduct({ price, image, name }: CartProductProps) {
+export const CartProduct: React.FC<CartProductProps> = ({ price, image, name }) => {
     return (
-        <div className={s.card}>
-            <div className={s["card-header"]}>
-                <img className={s["product-image"]} src={image} />
-                <span className={s.price}>{price}</span>
+        <div className={style["card"]}>
+            <div className={style["card-header"]}>
+                <img className={style["product-image"]} src={image} />
+                <span className={style["price"]}>{price}</span>
             </div>
-            <div className={s["card-body"]}>
-                <h2 className={s.name}>{name}</h2>
-                <div className={s.bin} />
+            <div className={style["card-body"]}>
+                <h2 className={style["name"]}>{name}</h2>
+                <div className={style["bin"]} />
             </div>
         </div>
     )

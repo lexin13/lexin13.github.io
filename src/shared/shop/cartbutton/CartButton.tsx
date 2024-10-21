@@ -1,14 +1,14 @@
 import React from 'react';
-import s from './cartbutton.module.scss';
+import style from './cartbutton.module.scss';
 
 export interface CartButtonProps {
     counter: number
 }
 
-export function CartButton({ counter }: CartButtonProps) {
+export const CartButton: React.FC<CartButtonProps> = ({ counter }) => {
     if (counter > 0)
         return (
-            <div className={s.inputContainer}>
+            <div className={style.inputContainer}>
                 <button>-</button>
                 <input type="text" value={counter}></input>
                 <button>+</button>
@@ -16,7 +16,7 @@ export function CartButton({ counter }: CartButtonProps) {
         )
     else
         return (
-            <button className={s.cartButton}>
+            <button className={style.cartButton}>
                 Add to cart
             </button>
         )

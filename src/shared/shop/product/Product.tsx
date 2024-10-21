@@ -1,5 +1,5 @@
 import React from "react";
-import s from './product.module.scss';
+import style from './product.module.scss';
 import { CartButton } from "../cartbutton/CartButton";
 
 interface ProductProps {
@@ -10,7 +10,7 @@ interface ProductProps {
     description: string;
 }
 
-export function Product({ price, images, category, name, description }: ProductProps) {
+export const Product: React.FC<ProductProps> = ({ price, images, category, name, description }) => {
     var imgList = [];
 
     for (var i = 0; i < images.length; i++) {
@@ -18,22 +18,22 @@ export function Product({ price, images, category, name, description }: ProductP
     }
 
     return (
-        <div className={s.card}>
-            <div className={s["card-header"]}>
-                <span className={s["category"]}>{category}</span>
-                <span className={s.price}>{price}</span>
+        <div className={style.card}>
+            <div className={style["card-header"]}>
+                <span className={style["category"]}>{category}</span>
+                <span className={style.price}>{price}</span>
             </div>
-            <div className={s["container"]}>
-                <div className={s["thumbnail-list"]}>
+            <div className={style["container"]}>
+                <div className={style["thumbnail-list"]}>
                     {imgList}
                 </div>
-                <div className={s["main-image"]}>
-                    <img className={s["product-image"]} src={images[0]} />
+                <div className={style["main-image"]}>
+                    <img className={style["product-image"]} src={images[0]} />
                 </div>
             </div>
-            <div className={s["card-body"]}>
-                <h2 className={s.name}>{name}</h2>
-                <p className={s.description}>{description}</p>
+            <div className={style["card-body"]}>
+                <h2 className={style.name}>{name}</h2>
+                <p className={style.description}>{description}</p>
                 <CartButton counter={0} />
             </div>
         </div>
