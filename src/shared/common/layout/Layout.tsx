@@ -1,7 +1,7 @@
 import React from "react";
 import { Header } from "../header/Header";
 
-export function Layout() {
+export const Layout: React.FC = () => {
     return (
         <div>
             <Header />

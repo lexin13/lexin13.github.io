@@ -1,5 +1,5 @@
-import React, { Children } from 'react';
-import s from './modal.module.scss';
+import React from 'react';
+import style from './modal.module.scss';
 import cn from 'clsx';
 
 interface ModalProps {
@@ -7,11 +7,11 @@ interface ModalProps {
     children?: React.ReactNode;
 }
 
-export function Modal({ visible, children }: ModalProps) {
+export const Modal: React.FC<ModalProps> = ({ visible, children }) => {
     return (
-        <div className={cn(s.modal, { [s.modalHidden]: !visible })}>
-            <div className={s.modalContent}>
-                <span className={s.close}>&times;</span>
+        <div className={cn(style.modal, { [style.modalHidden]: !visible })}>
+            <div className={style.modalContent}>
+                <span className={style.close}>&times;</span>
                 {children}
             </div>
         </div>

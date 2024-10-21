@@ -1,10 +1,10 @@
 import React from "react";
 import { Logo } from "../logo/Logo";
-import s from './header.module.scss';
+import style from './header.module.scss';
 
-export function Header() {
+export const Header: React.FC = () => {
     return (
-        <header className={s.header}>
+        <header className={style.header}>
             <div>
                 <Logo />
             </div>

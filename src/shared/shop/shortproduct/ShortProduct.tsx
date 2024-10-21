@@ -1,5 +1,5 @@
 import React from "react";
-import s from './short_product.module.scss';
+import style from './short_product.module.scss';
 import { CartButton } from "../cartbutton/CartButton";
 
 export interface ShortProductProps {
@@ -9,16 +9,16 @@ export interface ShortProductProps {
     description: string;
 }
 
-export function ShortProduct({ price, image, name, description }: ShortProductProps) {
+export const ShortProduct: React.FC<ShortProductProps> = ({ price, image, name, description }) => {
     return (
-        <div className={s.card}>
-            <div className={s["card-header"]}>
-                <img className={s["product-image"]} src={image} />
-                <span className={s.price}>{price}</span>
+        <div className={style.card}>
+            <div className={style["card-header"]}>
+                <img className={style["product-image"]} src={image} />
+                <span className={style.price}>{price}</span>
             </div>
-            <div className={s["card-body"]}>
-                <h2 className={s.name}>{name}</h2>
-                <p className={s.description}>{description}</p>
+            <div className={style["card-body"]}>
+                <h2 className={style.name}>{name}</h2>
+                <p className={style.description}>{description}</p>
                 <CartButton counter={0} />
             </div>
         </div>
