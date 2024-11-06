@@ -1,7 +1,8 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Modal } from './Modal';
-import { CartButton } from '../../shop/cartbutton/CartButton';
+import { Modal } from '../Modal';
+import { CartButton } from '../../../shop/cartbutton/CartButton';
+import { ModalOpeningButton } from './ModalOpeningButton';
 
 const meta: Meta<typeof Modal> = {
     title: 'Example/Common/Modal',
@@ -34,3 +35,7 @@ export const ModalWithChildren: Story = {
             <CartButton counter={0} />
         </Modal>
 };
+
+export const ModalWithState: Story = {
+    render: () => <ModalOpeningButton />
+}
