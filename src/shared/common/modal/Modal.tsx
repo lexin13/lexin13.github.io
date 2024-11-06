@@ -4,14 +4,15 @@ import cn from 'clsx';
 
 interface ModalProps {
     visible: boolean;
+    onClose: () => void;
     children?: React.ReactNode;
 }
 
-export const Modal: React.FC<ModalProps> = ({ visible, children }) => {
+export const Modal: React.FC<ModalProps> = ({ visible, onClose, children }) => {
     return (
         <div className={cn(style.modal, { [style.modalHidden]: !visible })}>
             <div className={style.modalContent}>
-                <span className={style.close}>&times;</span>
+                <span className={style.close} onClick={onClose}>&times;</span>
                 {children}
             </div>
         </div>
