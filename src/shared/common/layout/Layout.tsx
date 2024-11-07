@@ -1,8 +1,7 @@
 import React from "react";
 import { Header } from "../header/Header";
-import { useThemeContext } from "../theme/ThemeProvider";
-import { Theme } from "../theme/ThemeProvider";
-import style from './layout.module.scss';``
+import { useThemeContext, Theme } from "../theme/ThemeProvider";
+import style from './layout.module.scss';
 import cn from 'clsx';
 
 interface LayoutProps {

@@ -15,7 +15,7 @@ export type LanguageContextType = {
 
 const LanguageContext = createContext<LanguageContextType>({
     language: 'en',
-    toggleLanguage: () => { },
+    toggleLanguage: () => { return null; },
     translations: translations,
 });
 
