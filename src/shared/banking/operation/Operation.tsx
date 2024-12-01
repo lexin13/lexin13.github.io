@@ -1,7 +1,8 @@
 import React from "react";
 import style from './operation.module.scss';
+import { AbstractOperation } from './OperationTypes';
 
-interface OperationProps {
+export interface OperationProps {
     amount: number;
     category: string;
     name: string;
@@ -9,11 +10,11 @@ interface OperationProps {
     date: string;
 }
 
-export const Operation: React.FC<OperationProps> = ({ amount, category, name, description, date }) => {
+export const Operation: React.FC<AbstractOperation> = ({ amount, category, name, description, date }) => {
     return (
         <div className={style["card"]}>
             <div className={style["card-header"]}>
-                <span className={style["category"]}>{category}</span>
+                <span className={style["category"]}>{category.name}</span>
                 <span className={style["money-value"]}>{amount}</span>
             </div>
             <div className={style["card-body"]}>
