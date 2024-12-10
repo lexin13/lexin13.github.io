@@ -21,6 +21,15 @@ const TipWrapper = () => (
         <Tip title="This is a paragraph">
             <p className={style["element"]}>Paragraph text</p>
         </Tip>
+        <Tip title="This is a paragraph" content={
+            <>
+                <p>Additional Paragraph 1 text</p>
+                <p>Additional Paragraph 2 text</p>
+                <a href="#">Link</a>
+            </>
+        }>
+            <p className={style["element"]}>Tip with additional text</p>
+        </Tip>
     </div>
 )
 
@@ -33,8 +42,4 @@ const meta: Meta<typeof Tip> = {
 export default meta;
 
 export const Sample = {
-    args: {
-        price: 100,
-        name: 'Product Name',
-    },
 };
