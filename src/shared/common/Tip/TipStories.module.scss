@@ -1,0 +1,8 @@
+.test-elements {
+  display: flex;
+  flex-direction: column;
+
+  .element {
+    margin-bottom: 10px;
+  }
+}

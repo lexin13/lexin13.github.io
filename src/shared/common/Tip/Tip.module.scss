@@ -1,10 +1,26 @@
 .tip {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    background-color: #efc;
-    border-radius: 50%;
-    display: flex;
+    top: 100px;
+    left: 100px;
+    padding: 5px;
+    background-color: #555;
+    color: #ddd;
+    border-radius: 5px;
     justify-content: center;
     align-items: center;
 }
+
+
+// .tip {
+//     position: relative;
+//     display: inline-block;
+//     visibility: visible;
+//     background-color: #555;
+//     color: #fff;
+//     text-align: center;
+//     border-radius: 5px;
+//     padding: 5px;
+//     position: absolute;
+//     z-index: 1;
+//     bottom: 125%;
+// }
