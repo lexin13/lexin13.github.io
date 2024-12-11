@@ -1,6 +1,7 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import style from "./Tip.module.scss";
 import { createPortal } from "react-dom";
+import cn from "clsx";
 
 interface TipProps extends React.PropsWithChildren<{}> {
     title: string;
@@ -10,10 +11,21 @@ interface TipProps extends React.PropsWithChildren<{}> {
 export const Tip: React.FC<TipProps> = ({ title, content, children }) => {
     const container = React.useRef<HTMLDivElement>(null);
     const tip = React.useRef<HTMLDivElement>(null);
+    const timerRef = React.useRef(null);
     const [visible, setVisible] = React.useState(false);
+    const [mounted, setMounted] = React.useState(false);
     const [position, setPosition] = React.useState({});
-    const showTip = () => setVisible(true);
-    const hideTip = () => setVisible(false);
+
+    const showTip = () => {
+        timerRef.current && clearTimeout(timerRef.current);
+        setVisible(true);
+        setMounted(true);
+    };
+
+    const hideTip = () => {
+        timerRef.current = setTimeout(() => setMounted(false), 1000);
+        setVisible(false);
+    }
 
     useLayoutEffect(() => {
         visible &&
@@ -23,10 +35,14 @@ export const Tip: React.FC<TipProps> = ({ title, content, children }) => {
             })
     }, [visible]);
 
+    useEffect(() => {
+        return () => clearTimeout(timerRef.current);
+    }, []);
+
     return (
         <div className={style["tip-container"]} ref={container}>
-            {visible && createPortal(
-                <div className={style.tip} style={position} ref={tip}>
+            {mounted && createPortal(
+                <div className={cn(style.tip, { [style.hidden]: !visible })} style={position} ref={tip}>
                     <div className={style.title}>{title}</div>
                     {content}
                 </div>,
