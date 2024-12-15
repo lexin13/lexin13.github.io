@@ -1,0 +1,23 @@
+.collapse {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    transition: transform 1s;
+
+    &.hidden {
+        transform: translateY(-100%);
+    }
+}
+
+// .collapse {
+//     //transform: scaleY(0) 1s ease;
+//     width: 100px;
+//     height: 100px;
+//     background-color: blue;
+//     transition: transform 0.5s;
+
+//     &.hidden {
+//         //display: none;
+//         transform: translateX(100px);
+//     }
+// }
