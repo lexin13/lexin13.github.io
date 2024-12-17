@@ -1,11 +1,13 @@
 .collapse {
-    width: 100px;
+    width: 500px;
     height: 100px;
     background-color: blue;
-    transition: transform 1s;
+    transition: transform 0.3s;
+    transform: translateY(0);
 
     &.hidden {
         transform: translateY(-100%);
+        background-color: red;
     }
 }
 

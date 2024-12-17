@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from './collapse.module.scss';
 import cn from 'clsx';
 
@@ -12,19 +12,25 @@ export interface CollapseProps extends React.PropsWithChildren<{}> {
 
 export const Collapse: React.FC<CollapseProps> = ({ children, opened }) => {
 
-    const [mounted, setMounted] = React.useState(true);
+    const [hidden, setHidden] = useState(!opened);
+    const [mounted, setMounted] = React.useState(opened);
 
     const onTransitionEnd = (event: React.TransitionEvent) => {
-        console.log('Transition finished on', event.propertyName);
-        !opened && setMounted(false);
+        console.log('Transition finished on', event.propertyName, 'for opened = ', opened);
+        setMounted(opened);
+        setHidden(!opened);
     };
 
-    opened && !mounted && setMounted(true);
+    useEffect(() => {
+        setHidden(!opened);
+    }, [opened]);
 
-    console.log(opened, mounted);
+    // opened && !mounted && setMounted(true);
 
-    return (mounted &&
-        <div className={cn(style.collapse, { [style.hidden]: !opened })} onTransitionEnd={onTransitionEnd}>
+    console.log(opened, mounted, hidden);
+
+    return ((mounted || opened) &&
+        <div className={cn(style.collapse, { [style.hidden]: hidden || !opened })} onTransitionEnd={onTransitionEnd}>
             {children}
         </div>
     );
