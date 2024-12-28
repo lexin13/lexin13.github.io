@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import style from './collapse.module.scss';
+import style from './Collapse.module.scss';
 import cn from 'clsx';
 
 export interface CollapseProps extends React.PropsWithChildren {
