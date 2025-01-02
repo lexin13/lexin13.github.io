@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import cn from 'clsx';
-import { Helmet } from 'react-helmet';
-import { Frame } from '../Frame';
+//import { Helmet } from 'react-helmet';
+//import { Frame } from '../Frame';
 import s from './Page.sass';
 
 export type PageProps = {
@@ -11,13 +11,13 @@ export type PageProps = {
 };
 
 export const Page: FC<PageProps> = ({ className, title, children }) => (
-  <Frame className={cn(s.root, className)}>
+  <div className={cn(s.root, className)}>
     {typeof title === 'string' && (
-      <Helmet>
+      <div>
         <title>{title}</title>
-      </Helmet>
+      </div>
     )}
     <h1 className={s.title}>{title}</h1>
     <div className={s.page}>{children}</div>
-  </Frame>
+  </div>
 );

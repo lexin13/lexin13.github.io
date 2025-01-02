@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+//import { gql } from '@apollo/client';
 import { Mutation, ProfilePasswordMutationsChangeArgs } from 'src/server.types';
 import { get } from 'src/utils/unchanged';
 
