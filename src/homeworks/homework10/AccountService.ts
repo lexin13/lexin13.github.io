@@ -16,10 +16,18 @@ export class AccountService {
     };
 
     private productDiscounts: Record<ProductType, Record<UserType, number>> = {
-        Car: { Standard: 0, Premium: 0, Gold: 0.05, Free: 0 },
+        Car: { Standard: 0, Premium: 0, Gold: 0, Free: 0 },
         Toy: { Standard: 0, Premium: 0, Gold: 0, Free: 0 },
         Food: { Standard: 0, Premium: 0, Gold: 0, Free: 0 },
     };
+
+    public setUserDiscounts(userDiscounts: Partial<Record<UserType, number>>): void {
+        this.userDiscounts = { ...this.userDiscounts, ...userDiscounts };
+    }
+
+    public getUserDiscounts(): Record<UserType, number> {
+        return this.userDiscounts;
+    }
 
     public getDiscount(userType: UserType, productType: ProductType): number {
         const userDiscount = this.userDiscounts[userType] || 0;
