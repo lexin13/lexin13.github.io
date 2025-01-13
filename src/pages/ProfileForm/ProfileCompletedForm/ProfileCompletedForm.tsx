@@ -23,7 +23,11 @@ export const ProfileCompletedForm: React.FC = () => {
                     <label>Nickname</label>
                     <input
                         {...register('nickname', {
-                            required: 'Required field'
+                            required: 'Required field',
+                            minLength: {
+                                value: 3,
+                                message: 'Nickname must be at least 3 characters'
+                            }
                         })}
                         className={cn({ [style.inputError]: errors.nickname })}
                     />

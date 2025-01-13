@@ -38,7 +38,15 @@ export const ChangePasswordCompletedForm: React.FC = () => {
                     <input
                         type="password"
                         {...register('newPassword', {
-                            required: 'Required field'
+                            required: 'Required field',
+                            minLength: {
+                                value: 8,
+                                message: 'Password must be at least 8 characters'
+                            },
+                            pattern: {
+                                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!:$#@-])[A-Za-z\d!:$#@-]{8,}$/,
+                                message: 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character (!:$#@-)'
+                            }
                         })}
                         className={cn({ [style.inputError]: errors.newPassword })}
                     />
