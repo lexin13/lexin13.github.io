@@ -1,34 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { ThemeProvider } from '../shared/common/theme/ThemeProvider';
 import { LanguageProvider } from '../shared/common/language/LanguageProvider';
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import { LoginForm } from 'src/pages/LoginForm/LoginForm';
+import { ProfileForm } from 'src/pages/ProfileForm/ProfileForm';
+import { OperationForm } from 'src/pages/OperationForm/OperationForm';
 
-function App() {
+const Home: React.FC = () => {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h3>
-              Алехин Алексей
-            </h3>
-            <ul>
-              <li>
-                Опыт работы 18 лет, сопровождение и разработка Enterprise проекта ориентированного на учет персонала, написание функций и хранимых процедур для SQL Server, оптимизация SQL запросов, разработака отчетов
-              </li>
-              <li>
-                Цель обучения: пополнение и систематизация знаний о React для дальнейшего применения в рабочем проекте
-              </li>
-              <li>
-                Технологии: Delphi, MS SQL Server, SQL, FastReports, Git; знаком с C#, JS
-              </li>
-            </ul>
-          </header>
-        </div>
-      </LanguageProvider>
-    </ThemeProvider>
+    <div>
+      <h1>Home</h1>
+    </div>
+  );
+}
+
+const App: React.FC = () => {
+  return (
+    <LanguageProvider>
+      <ThemeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LoginForm />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/profile" element={<ProfileForm />} />
+            <Route path="/operation" element={<OperationForm />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </LanguageProvider>
   );
 }
 
