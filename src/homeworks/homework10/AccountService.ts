@@ -1,11 +1,7 @@
 type UserType = 'Standard' | 'Premium' | 'Gold' | 'Free';
 type ProductType = 'Car' | 'Toy' | 'Food';
 
-interface Discount {
-    userType: UserType;
-    productType: ProductType;
-    discount: number;
-}
+import Database from './Database';
 
 export class AccountService {
     private userDiscounts: Record<UserType, number> = {
@@ -49,4 +45,25 @@ export class AccountService {
         const productDiscount = this.getProductDiscount(productType, userType);
         return userDiscount + productDiscount;
     }
+
+    public async saveToDatabase(): Promise<void> {
+        await Database.save('user_discounts', this.userDiscounts);
+        await Database.save('product_discounts', Array.from(this.productDiscounts.entries()));
+    }
+
+    public async loadFromDatabase(): Promise<void> {
+        const userDiscounts = await Database.load<Record<UserType, number>>('user_discounts');
+        const productDiscounts = await Database.load<[ProductType, [UserType, number][]][]>('product_discounts');
+
+        if (userDiscounts) {
+            this.userDiscounts = userDiscounts;
+        }
+
+        if (productDiscounts) {
+            this.productDiscounts = new Map(
+                productDiscounts.map(([productType, discounts]) => [productType, new Map(discounts)])
+            );
+        }
+    }
+
 }
