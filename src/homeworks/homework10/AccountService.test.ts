@@ -1,11 +1,20 @@
 import { AccountService } from './AccountService';
 
+
 describe('AccountService', () => {
     let accountService: AccountService;
+    let writeMock: jest.SpyInstance;
+    let readMock: jest.SpyInstance;
 
     beforeEach(() => {
         accountService = new AccountService({ Standard: 0.1, Premium: 0.2, Gold: 0.3 });
-    });
+        writeMock = jest.spyOn(accountService, 'saveToDatabase').mockImplementation(() => Promise.resolve());
+        readMock = jest.spyOn(accountService, 'loadFromDatabase').mockImplementation(() => Promise.resolve(null));        
+    });   
+
+    afterEach(() => {
+        jest.clearAllMocks();
+      });
 
     it('should correctly return default user discounts', () => {
         expect(accountService.getUserDiscounts()).toEqual({ Standard: 0.1, Premium: 0.2, Gold: 0.3, Free: 0 });

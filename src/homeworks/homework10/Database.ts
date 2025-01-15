@@ -1,4 +1,4 @@
-export class Database {
+export default class Database {
     public static async save<T>(table: string, data: T): Promise<void> {
         return new Promise((resolve) => setTimeout(resolve, 1000));
     }

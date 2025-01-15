@@ -1,27 +1,30 @@
+import Database from './Database';
+
 type UserType = 'Standard' | 'Premium' | 'Gold' | 'Free';
 type ProductType = 'Car' | 'Toy' | 'Food';
 
-import Database from './Database';
+type UserTypeDiscount = Record<UserType, number>;
+//type ProductTypeDiscount = Record<ProductType, UserTypeDiscount>;
 
 export class AccountService {
-    private userDiscounts: Record<UserType, number> = {
+    private userDiscounts: UserTypeDiscount = {
         Standard: 0,
         Premium: 0,
         Gold: 0,
         Free: 0,
     };
-    
-    constructor(userDiscounts: Partial<Record<UserType, number>>){
-        this.setUserDiscounts(userDiscounts);
-    }    
 
     private productDiscounts = new Map<ProductType, Map<UserType, number>>;
 
-    public setUserDiscounts(userDiscounts: Partial<Record<UserType, number>>): void {
+    constructor(userDiscounts: Partial<UserTypeDiscount>) {
+        this.setUserDiscounts(userDiscounts);
+    }
+
+    public setUserDiscounts(userDiscounts: Partial<UserTypeDiscount>): void {
         this.userDiscounts = { ...this.userDiscounts, ...userDiscounts };
     }
 
-    public getUserDiscounts(): Record<UserType, number> {
+    public getUserDiscounts(): UserTypeDiscount {
         return this.userDiscounts;
     }
 
@@ -34,11 +37,11 @@ export class AccountService {
     }
 
     public setProductDiscount(productType: ProductType, userType: UserType, discount: number): void {
-          if (!this.productDiscounts.has(productType)) {
+        if (!this.productDiscounts.has(productType)) {
             this.productDiscounts.set(productType, new Map<UserType, number>());
-          }
-          this.productDiscounts.get(productType)!.set(userType, discount);
-      }
+        }
+        this.productDiscounts.get(productType)!.set(userType, discount);
+    }
 
     public getDiscount(productType: ProductType, userType: UserType): number {
         const userDiscount = this.getUserDiscount(userType);
@@ -52,17 +55,16 @@ export class AccountService {
     }
 
     public async loadFromDatabase(): Promise<void> {
-        const userDiscounts = await Database.load<Record<UserType, number>>('user_discounts');
-        const productDiscounts = await Database.load<[ProductType, [UserType, number][]][]>('product_discounts');
+        const userTypeDiscounts = await Database.load<UserTypeDiscount>('user_type_discounts');
+        const productTypeDiscounts = await Database.load<[ProductType, UserType, number][]>('product_type_discounts');
 
-        if (userDiscounts) {
-            this.userDiscounts = userDiscounts;
+        if (userTypeDiscounts) {
+            this.userDiscounts = userTypeDiscounts;
         }
 
-        if (productDiscounts) {
-            this.productDiscounts = new Map(
-                productDiscounts.map(([productType, discounts]) => [productType, new Map(discounts)])
-            );
+        if (productTypeDiscounts) {
+            this.productDiscounts = new Map<ProductType, Map<UserType, number>>;
+            productTypeDiscounts.forEach(([productType, userType, discount]) => this.setProductDiscount(productType, userType, discount));
         }
     }
 
