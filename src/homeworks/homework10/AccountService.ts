@@ -1,9 +1,9 @@
 import Database from './Database';
 
-type UserType = 'Standard' | 'Premium' | 'Gold' | 'Free';
-type ProductType = 'Car' | 'Toy' | 'Food';
+export type UserType = 'Standard' | 'Premium' | 'Gold' | 'Free';
+export type ProductType = 'Car' | 'Toy' | 'Food';
 
-type UserTypeDiscount = Record<UserType, number>;
+export type UserTypeDiscount = Record<UserType, number>;
 //type ProductTypeDiscount = Record<ProductType, UserTypeDiscount>;
 
 export class AccountService {
@@ -13,14 +13,23 @@ export class AccountService {
         Gold: 0,
         Free: 0,
     };
-
+    
     private productDiscounts = new Map<ProductType, Map<UserType, number>>;
+    private database: Database;
 
-    constructor(userDiscounts: Partial<UserTypeDiscount>) {
-        this.setUserDiscounts(userDiscounts);
+    constructor(database: Database) {
+        this.database = database;
     }
 
     public setUserDiscounts(userDiscounts: Partial<UserTypeDiscount>): void {
+        if (Object.values(userDiscounts).some((discount) => discount < 0)) {
+            throw new Error('Discount cannot be negative');
+        }
+
+        if (Object.values(userDiscounts).some((discount) => discount > 100)) {
+            throw new Error('Discount cannot be more than 100');
+        }
+
         this.userDiscounts = { ...this.userDiscounts, ...userDiscounts };
     }
 
@@ -29,7 +38,7 @@ export class AccountService {
     }
 
     public getUserDiscount(userType: UserType): number {
-        return this.userDiscounts[userType] || 0;
+        return this.userDiscounts[userType];
     }
 
     public getProductDiscount(productType: ProductType, userType: UserType): number {
@@ -37,6 +46,14 @@ export class AccountService {
     }
 
     public setProductDiscount(productType: ProductType, userType: UserType, discount: number): void {
+        if (discount < 0) {
+            throw new Error('Discount cannot be negative');
+        }
+
+        if (discount > 100) {
+            throw new Error('Discount cannot be more than 100');
+        }   
+
         if (!this.productDiscounts.has(productType)) {
             this.productDiscounts.set(productType, new Map<UserType, number>());
         }
@@ -46,17 +63,24 @@ export class AccountService {
     public getDiscount(productType: ProductType, userType: UserType): number {
         const userDiscount = this.getUserDiscount(userType);
         const productDiscount = this.getProductDiscount(productType, userType);
-        return userDiscount + productDiscount;
+        return Math.min(userDiscount + productDiscount, 100);
     }
 
     public async saveToDatabase(): Promise<void> {
-        await Database.save('user_discounts', this.userDiscounts);
-        await Database.save('product_discounts', Array.from(this.productDiscounts.entries()));
+        await this.database.save('user_discounts', this.userDiscounts);
+
+        const productDiscounts: [ProductType, UserType, number][] = [];
+        this.productDiscounts.forEach((discounts, productType) => {
+            discounts.forEach((discount, userType) => {
+                productDiscounts.push([productType, userType, discount]);
+            });
+        });
+        await this.database.save('product_discounts', productDiscounts);
     }
 
     public async loadFromDatabase(): Promise<void> {
-        const userTypeDiscounts = await Database.load<UserTypeDiscount>('user_type_discounts');
-        const productTypeDiscounts = await Database.load<[ProductType, UserType, number][]>('product_type_discounts');
+        const userTypeDiscounts = await this.database.load<UserTypeDiscount>('user_type_discounts');
+        const productTypeDiscounts = await this.database.load<[ProductType, UserType, number][]>('product_type_discounts');
 
         if (userTypeDiscounts) {
             this.userDiscounts = userTypeDiscounts;
