@@ -5,6 +5,7 @@ import { LanguageSwitcher } from "../language/LanguageSwitcher";
 import { useThemeContext, Theme } from "../theme/ThemeProvider";
 import style from './header.module.scss';
 import cn from 'clsx';
+import { Navigation } from "../Navigation/Navigation";
 
 export const Header: React.FC = () => {
 
@@ -16,6 +17,7 @@ export const Header: React.FC = () => {
             [style.light]: themeContext.theme === Theme.light
         })}>
             <Logo />
+            <Navigation />
             <div>
                 <LanguageSwitcher />
                 <ThemeSwitcher />            

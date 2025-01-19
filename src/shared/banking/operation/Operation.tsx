@@ -1,6 +1,7 @@
 import React from "react";
 import style from './operation.module.scss';
 import { AbstractOperation } from './OperationTypes';
+import { useLocation, useNavigate } from "react-router-dom";
 
 export interface OperationProps {
     amount: number;
@@ -10,7 +11,15 @@ export interface OperationProps {
     date: string;
 }
 
-export const Operation: React.FC<AbstractOperation> = ({ amount, category, name, description, date }) => {
+export const Operation: React.FC<AbstractOperation> = ({ id, amount, category, name, description, date }) => {
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const editHandler = () => {
+        navigate(location.pathname + "/edit/" + id);
+    }
+
     return (
         <div className={style["card"]}>
             <div className={style["card-header"]}>
@@ -23,7 +32,7 @@ export const Operation: React.FC<AbstractOperation> = ({ amount, category, name,
             </div>
             <div className={style["card-footer"]}>
                 <span className={style["date"]}>{date}</span>
-                <button className={style["edit-button"]}>Edit</button>
+                <button className={style["edit-button"]} onClick={editHandler}>Edit</button>
             </div>
         </div>
     );
