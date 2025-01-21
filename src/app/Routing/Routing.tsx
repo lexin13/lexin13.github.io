@@ -9,7 +9,8 @@ import { LoginForm } from 'src/pages/LoginForm/LoginForm';
 export const Routing: React.FC = () => {
     const location = useLocation();
     const state = location.state as { backgroundLocation?: Location };
-
+    console.log(location);
+    console.log(state);
     return (
         <>
             <Routes location={state?.backgroundLocation || location}>
@@ -20,6 +21,7 @@ export const Routing: React.FC = () => {
             {
                 state?.backgroundLocation && (
                     <Routes>
+                        <Route path="/modals" element={<ModalOperationForm />} />
                         <Route path="/operations/edit/:id" element={<ModalOperationForm />} />
                     </Routes>
                 )

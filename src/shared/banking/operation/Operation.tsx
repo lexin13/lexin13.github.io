@@ -17,7 +17,7 @@ export const Operation: React.FC<AbstractOperation> = ({ id, amount, category, n
     const location = useLocation();
 
     const editHandler = () => {
-        navigate(location.pathname + "/edit/" + id);
+        navigate(location.pathname + "/edit/" + id, { state: { id, backgroundLocation: location } });
     }
 
     return (
