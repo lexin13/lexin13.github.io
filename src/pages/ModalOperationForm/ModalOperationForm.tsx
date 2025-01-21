@@ -4,6 +4,7 @@ import { OperationForm } from "src/pages/OperationForm/OperationForm";
 import style from './ModalOperationForm.module.scss';
 
 export const ModalOperationForm: React.FC = () => {
+    console.log('ModalOperationForm');
     const [isOpen, setIsOpen] = React.useState(false);
     const [inputText, setInputText] = React.useState('');
 
